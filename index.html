@@ -1,12 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+	<title>Scroller - Normal</title>
+	<link rel="stylesheet" href="asset/ui.css" />
+	
+	<script src="./src/Animate.js"></script>
+	<script src="./src/Scroller.js"></script>
+
+	<script src="asset/render.js"></script>
+	<style>
+		canvas {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		#content {
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: transparent;
+		}
+		span {
+			display: inline-block;
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			transform: 'translate3d(500, 500)';
+			background: #000;
+		}
+	</style>
 </head>
 <body>
-  <h1>TEST</h1>
-</body>
+	<div id="container">
+		<canvas id="canvas" width="749" height="893"></canvas>
+		<span id="spot"></span>
+		<div id="content">
+		</div>
+	</div>
+	
+	<div id="settings">
+		<div><label for="scrollingX">ScrollingX: </label><input type="checkbox" id="scrollingX" checked/></div>
+		<div><label for="scrollingY">ScrollingY: </label><input type="checkbox" id="scrollingY" checked/></div>
+		<div><label for="animating">Animating: </label><input type="checkbox" id="animating" checked/></div>
+		<div><label for="bouncing">Bouncing: </label><input type="checkbox" id="bouncing" checked/></div>
+		<div><label for="locking">Locking: </label><input type="checkbox" id="locking" checked/></div>
+
+		<div><label for="zooming">Zooming: </label><input type="checkbox" id="zooming" checked/></div>
+		<div><label for="minZoom">Min Zoom: </label><input type="text" id="minZoom" size="5" value="0.5"/></div>
+		<div><label for="maxZoom">Max Zoom: </label><input type="text" id="maxZoom" size="5" value="3"/></div>
+		<div><label for="zoomLevel">Zoom Level: </label><input type="text" id="zoomLevel" size="5"/></div>
+		<div><button id="zoom">Zoom to Level</button><button id="zoomIn">+</button><button id="zoomOut">-</button></div>
+		
+		<div><label for="scrollLeft">Scroll Left: </label><input type="text" id="scrollLeft" size="9"/></div>
+		<div><label for="scrollTop">Scroll Top: </label><input type="text" id="scrollTop" size="9"/></div>
+		<div><button id="scrollTo">Scroll to Coords</button></div>
+
+		<div><button id="scrollByUp">&uarr;</button><button id="scrollByDown">&darr;</button><button id="scrollByLeft">&larr;</button><button id="scrollByRight">&rarr;</button></div>
+	</div>
+
+	<!-- Custom rendering code -->
+	<script type="text/javascript">
+
+		// Settings
+		var contentWidth = 1500;
+		var contentHeight = 1334;
+		var cellWidth = 100;
+		var cellHeight = 100;
+
+		var spot = document.getElementById("spot");
+		var ctx = document.getElementById("canvas").getContext('2d');
+		var img = new Image();
+		img.src = './map.jpg';
+		img.onload = function() {
+			ctx.drawImage(img, 0, 0, 749, 893, 0, 0, 749, 893);
+		}
+	</script>
+	
+	<!-- Create Scroller, bind UI layer and mouse/touch events -->
+	<script src="asset/ui.js"></script>
+	</body>
 </html>
